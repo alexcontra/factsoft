@@ -3,10 +3,42 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class implementGUI implements ActionListener {
     protected JFrame mainFrame = new JFrame();
     protected JPanel mainPanel = new JPanel();
+    protected JTextField furnizor = new JTextField();
+    protected JTextField CIF = new JTextField();
+    protected JTextField capitalSocial = new JTextField();
+    protected JTextField sediul = new JTextField();
+    protected JTextField judetul = new JTextField();
+    protected JTextField IBAN = new JTextField();
+    protected JTextField banca = new JTextField();
+    protected JTextField nrFacturii = new JTextField();
+    //data , se va genera mereu data curenta si ora la emiterea facturii
+    protected JTextField nrAviz =  new JTextField();
+    protected JTextField cumparator = new JTextField();
+    protected JTextField nrOrdin = new JTextField();
+    protected JTextField CIFproprietar = new JTextField();
+    protected JTextField Sediul = new JTextField();
+    protected JTextField Judetul = new JTextField();
+    protected JTextField IBANfirma = new JTextField();
+    protected JTextField bancaApr = new JTextField();
+    protected JButton continua = new JButton("Continua");
+
+    //partejos
+
+    protected JTextField denumireProdus = new JTextField();
+    protected JTextField UM = new JTextField();
+    protected JTextField cantitate = new JTextField();
+    protected JTextField pretulUnitar = new JTextField();
+    protected JTextField valoareLei = new JTextField();
+    //label cu denumirea nr crt , denumirea produselor , um ,cantitate ,pret unitar , valoare lei
+    protected int totalWaccize = 0;
+    protected int nrCrt=0;
+    protected JButton adaugaProdus = new JButton("Adauga");
+    protected JButton generateFACT = new JButton("Genereaza");
+    protected JFrame secondFrame = new JFrame();
+    protected JPanel secondPanel = new JPanel();
     public implementGUI()
     {
             mainFrame.setSize(540,650);
@@ -18,24 +50,7 @@ public class implementGUI implements ActionListener {
     }
     public void addDataParteSUS()
     {
-        JTextField furnizor = new JTextField();
-        JTextField CIF = new JTextField();
-        JTextField capitalSocial = new JTextField();
-        JTextField sediul = new JTextField();
-        JTextField judetul = new JTextField();
-        JTextField IBAN = new JTextField();
-        JTextField banca = new JTextField();
-        JTextField nrFacturii = new JTextField();
-        //data , se va genera mereu data curenta si ora la emiterea facturii
-        JTextField nrAviz =  new JTextField();
-        JTextField cumparator = new JTextField();
-        JTextField nrOrdin = new JTextField();
-        JTextField CIFproprietar = new JTextField();
-        JTextField Sediul = new JTextField();
-        JTextField Judetul = new JTextField();
-        JTextField IBANfirma = new JTextField();
-        JTextField bancaApr = new JTextField();
-        JButton continua = new JButton("Continua");
+
 
         JLabel furnizorLB = new JLabel("Furnizor");
         JLabel CIFLB = new JLabel("C.I.F");
@@ -144,7 +159,72 @@ public class implementGUI implements ActionListener {
         continua.addActionListener(this);
         mainPanel.add(continua);
     }
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void createSecondFP()
+    {
+        mainFrame.setVisible(false);
+        secondFrame.setSize(500,500);
+        secondFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        secondFrame.setLocationRelativeTo(null);
+        secondPanel.setLayout(null);
+        secondFrame.setVisible(true);
+        secondFrame.add(secondPanel);
+        //
+        JLabel denumireProdusLB = new JLabel("Denumire Produs");
+        JLabel UMLB = new JLabel("U.M");
+        JLabel cantitateLB = new JLabel("Cantitate");
+        JLabel pretulUnitarLB = new JLabel("Pretul Unitar");
+        JLabel valoareLeiLB = new JLabel("Valoare Lei");
+        //
+        denumireProdusLB.setBounds(170,20,170,30);
+        denumireProdus.setBounds(170,45,170,30);
+        secondPanel.add(denumireProdusLB);
+        secondPanel.add(denumireProdus);
 
+        UMLB.setBounds(170,80,120,30);
+        UM.setBounds(170,105,170,30);
+        secondPanel.add(UMLB);
+        secondPanel.add(UM);
+
+        cantitateLB.setBounds(170,135,120,30);
+        cantitate.setBounds(170,165,170,30);
+        secondPanel.add(cantitateLB);
+        secondPanel.add(cantitate);
+
+        pretulUnitarLB.setBounds(170,195,120,30);
+        pretulUnitar.setBounds(170,225,170,30);
+        secondPanel.add(pretulUnitarLB);
+        secondPanel.add(pretulUnitar);
+
+        valoareLeiLB.setBounds(170,255,170,30);
+        valoareLei.setBounds(170,290,170,30);
+        secondPanel.add(valoareLeiLB);
+        secondPanel.add(valoareLei);
+
+        adaugaProdus.setBounds(130,330,100,30);
+        adaugaProdus.addActionListener(this);
+        secondPanel.add(adaugaProdus);
+
+        generateFACT.setBounds(260,330,115,30);
+        generateFACT.addActionListener(this);
+        secondPanel.add(generateFACT);
+    }
+    public void reset()
+    {
+        denumireProdus.setText(null);
+        UM.setText(null);
+        cantitate.setText(null);
+        pretulUnitar.setText(null);
+        valoareLei.setText(null);
+    }
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(actionEvent.getSource()==continua)
+        {
+            createSecondFP();
+        }
+        if(actionEvent.getSource()==adaugaProdus)
+        {
+            reset();
+            //add restul in BD
+        }
     }
 }
