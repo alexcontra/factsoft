@@ -24,11 +24,9 @@ public class implementGUI implements ActionListener {
     protected JTextField IBANfirma = new JTextField();
     protected JTextField bancaApr = new JTextField();
     protected JButton continua = new JButton("Continua");
-
     //partejos
-
     protected JTextField denumireProdus = new JTextField();
-    protected JTextField UM = new JTextField();
+    protected JTextField UM = new JTextField();//unitati materiale
     protected JTextField cantitate = new JTextField();
     protected JTextField pretulUnitar = new JTextField();
     protected JTextField valoareLei = new JTextField();
@@ -39,6 +37,7 @@ public class implementGUI implements ActionListener {
     protected JButton generateFACT = new JButton("Genereaza");
     protected JFrame secondFrame = new JFrame();
     protected JPanel secondPanel = new JPanel();
+    protected JButton backButton = new JButton("Back");
     public implementGUI()
     {
             mainFrame.setSize(540,650);
@@ -50,8 +49,6 @@ public class implementGUI implements ActionListener {
     }
     public void addDataParteSUS()
     {
-
-
         JLabel furnizorLB = new JLabel("Furnizor");
         JLabel CIFLB = new JLabel("C.I.F");
         JLabel capitalSocialLB = new JLabel("Capital Social");
@@ -200,13 +197,17 @@ public class implementGUI implements ActionListener {
         secondPanel.add(valoareLeiLB);
         secondPanel.add(valoareLei);
 
-        adaugaProdus.setBounds(130,330,100,30);
+        adaugaProdus.setBounds(115,330,115,30);
         adaugaProdus.addActionListener(this);
         secondPanel.add(adaugaProdus);
 
         generateFACT.setBounds(260,330,115,30);
         generateFACT.addActionListener(this);
         secondPanel.add(generateFACT);
+
+        backButton.setBounds(180,380,135,30);
+        backButton.addActionListener(this);
+        secondPanel.add(backButton);
     }
     public void reset()
     {
@@ -216,6 +217,9 @@ public class implementGUI implements ActionListener {
         pretulUnitar.setText(null);
         valoareLei.setText(null);
     }
+    protected String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="";
+    protected int C_I_F1=0,I_B_A_N=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0,I_B_A_N_prop=0;
+    protected double CapitalSOCIAL=0.0;
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==continua)
         {
@@ -225,6 +229,11 @@ public class implementGUI implements ActionListener {
         {
             reset();
             //add restul in BD
+        }
+        if(actionEvent.getSource()==backButton)
+        {
+            mainFrame.setVisible(true);
+            secondFrame.setVisible(false);
         }
     }
 }
