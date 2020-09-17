@@ -1,43 +1,46 @@
 package GUI;
-
+import Product.product;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class implementGUI implements ActionListener {
-    protected JFrame mainFrame = new JFrame();
-    protected JPanel mainPanel = new JPanel();
-    protected JTextField furnizor = new JTextField();
-    protected JTextField CIF = new JTextField();
-    protected JTextField capitalSocial = new JTextField();
-    protected JTextField sediul = new JTextField();
-    protected JTextField judetul = new JTextField();
-    protected JTextField IBAN = new JTextField();
-    protected JTextField banca = new JTextField();
-    protected JTextField nrFacturii = new JTextField();
+     JFrame mainFrame = new JFrame();
+     JPanel mainPanel = new JPanel();
+   JTextField furnizor = new JTextField();
+    JTextField CIF = new JTextField();
+     JTextField capitalSocial = new JTextField();
+     JTextField sediul = new JTextField();
+     JTextField judetul = new JTextField();
+     JTextField IBAN = new JTextField();
+    JTextField banca = new JTextField();
+     JTextField nrFacturii = new JTextField();
     //data , se va genera mereu data curenta si ora la emiterea facturii
-    protected JTextField nrAviz =  new JTextField();
-    protected JTextField cumparator = new JTextField();
-    protected JTextField nrOrdin = new JTextField();
-    protected JTextField CIFproprietar = new JTextField();
-    protected JTextField Sediul = new JTextField();
-    protected JTextField Judetul = new JTextField();
-    protected JTextField IBANfirma = new JTextField();
-    protected JTextField bancaApr = new JTextField();
-    protected JButton continua = new JButton("Continua");
+     JTextField nrAviz =  new JTextField();
+     JTextField cumparator = new JTextField();
+    JTextField nrOrdin = new JTextField();
+    JTextField CIFproprietar = new JTextField();
+     JTextField Sediul = new JTextField();
+     JTextField Judetul = new JTextField();
+     JTextField IBANfirma = new JTextField();
+    JTextField bancaApr = new JTextField();
+     JButton continua = new JButton("Continua");
     //partejos
-    protected JTextField denumireProdus = new JTextField();
-    protected JTextField UM = new JTextField();//unitati materiale
-    protected JTextField cantitate = new JTextField();
-    protected JTextField pretulUnitar = new JTextField();
-    protected JTextField valoareLei = new JTextField();
+     JTextField denumireProdus = new JTextField();
+     JTextField UM = new JTextField();//unitati materiale
+     JTextField cantitate = new JTextField();
+     JTextField pretulUnitar = new JTextField();
+    JTextField valoareLei = new JTextField();
     //label cu denumirea nr crt , denumirea produselor , um ,cantitate ,pret unitar , valoare lei
-    protected int totalWaccize = 0;
-    protected int nrCrt=0;
-    protected JButton adaugaProdus = new JButton("Adauga");
-    protected JButton generateFACT = new JButton("Genereaza");
-    protected JFrame secondFrame = new JFrame();
-    protected JPanel secondPanel = new JPanel();
-    protected JButton backButton = new JButton("Back");
+     int totalWaccize = 0;
+    int nrCrt=0;
+    JButton adaugaProdus = new JButton("Adauga");
+     JButton generateFACT = new JButton("Genereaza");
+     JFrame secondFrame = new JFrame();
+     JPanel secondPanel = new JPanel();
+    JButton backButton = new JButton("Back");
     public implementGUI()
     {
             mainFrame.setSize(540,650);
@@ -156,6 +159,24 @@ public class implementGUI implements ActionListener {
         continua.addActionListener(this);
         mainPanel.add(continua);
     }
+    public void resetPS()
+    {
+        furnizor.setText(null);
+        sediul.setText(null);
+        judetul.setText(null);
+        banca.setText(null);
+        CIF.setText(null);
+        nrFacturii.setText(null);
+        nrAviz.setText(null);
+        CIFproprietar.setText(null);
+        IBANfirma.setText(null);
+        capitalSocial.setText(null);
+        Judetul.setText(null);
+        Sediul.setText(null);
+        bancaApr.setText(null);
+        IBAN.setText(null);
+        cumparator.setText(null);
+    }
     public void createSecondFP()
     {
         mainFrame.setVisible(false);
@@ -217,18 +238,58 @@ public class implementGUI implements ActionListener {
         pretulUnitar.setText(null);
         valoareLei.setText(null);
     }
-    protected String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="";
-    protected int C_I_F1=0,I_B_A_N=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0,I_B_A_N_prop=0;
-    protected double CapitalSOCIAL=0.0;
+     String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="";
+     int C_I_F1=0,I_B_A_N=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0,I_B_A_N_prop=0, adunapret=0;;
+     double CapitalSOCIAL=0.0;
+     ArrayList<product> listaProduse = new ArrayList<product>();
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==continua)
         {
+            FURNIZOR+=furnizor.getText();
+            SEDIUL+=sediul.getText();
+            JUD+=judetul.getText();
+            BANCA1+=banca.getText();
+            CUMPARATOR+=cumparator.getText();
+            SEDIULprop+=Sediul.getText();
+            JUDprop+=Judetul.getText();
+            BANCAprop+=bancaApr.getText();
+            C_I_F1+=Integer.parseInt(CIF.getText());
+            I_B_A_N+=Integer.parseInt(IBAN.getText());
+            nrFACT+=Integer.parseInt(nrFacturii.getText());
+            nrAVIZ+=Integer.parseInt(nrAviz.getText());
+            nrORDIN+=Integer.parseInt(nrOrdin.getText());
+            C_I_F2P+=Integer.parseInt(CIFproprietar.getText());
+            I_B_A_N_prop+=Integer.parseInt(IBANfirma.getText());
+            CapitalSOCIAL+=Double.parseDouble(capitalSocial.getText());
             createSecondFP();
         }
         if(actionEvent.getSource()==adaugaProdus)
         {
+            product objNew= new product(denumireProdus.getText(),Integer.parseInt(UM.getText())
+                    ,Integer.parseInt(cantitate.getText())
+                    ,Double.parseDouble(pretulUnitar.getText()),
+                    Double.parseDouble(valoareLei.getText())
+                    );
+            listaProduse.add(objNew);
+            nrCrt+=listaProduse.size();
+            Iterator<product> ii = listaProduse.iterator();
+            while(ii.hasNext())
+            {
+                product p = ii.next();
+                if(!ii.hasNext())
+                {
+                    adunapret+=p.valLei;
+                }
+            }
+            System.out.println(adunapret);
             reset();
             //add restul in BD
+        }
+        if(actionEvent.getSource()==generateFACT)
+        {
+            //gen WORDOC
+            reset();
+            resetPS();
         }
         if(actionEvent.getSource()==backButton)
         {
