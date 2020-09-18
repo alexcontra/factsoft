@@ -7,26 +7,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class implementGUI implements ActionListener {
-     JFrame mainFrame = new JFrame();
-     JPanel mainPanel = new JPanel();
-   JTextField furnizor = new JTextField();
-    JTextField CIF = new JTextField();
-     JTextField capitalSocial = new JTextField();
-     JTextField sediul = new JTextField();
-     JTextField judetul = new JTextField();
-     JTextField IBAN = new JTextField();
-    JTextField banca = new JTextField();
-     JTextField nrFacturii = new JTextField();
-    //data , se va genera mereu data curenta si ora la emiterea facturii
-     JTextField nrAviz =  new JTextField();
-     JTextField cumparator = new JTextField();
-    JTextField nrOrdin = new JTextField();
-    JTextField CIFproprietar = new JTextField();
-     JTextField Sediul = new JTextField();
-     JTextField Judetul = new JTextField();
-     JTextField IBANfirma = new JTextField();
-    JTextField bancaApr = new JTextField();
-     JButton continua = new JButton("Continua");
+         JFrame mainFrame = new JFrame();
+         JPanel mainPanel = new JPanel();
+       JTextField furnizor = new JTextField();
+        JTextField CIF = new JTextField();
+         JTextField capitalSocial = new JTextField();
+         JTextField sediul = new JTextField();
+         JTextField judetul = new JTextField();
+         JTextField IBAN = new JTextField();
+        JTextField banca = new JTextField();
+         JTextField nrFacturii = new JTextField();
+        //data , se va genera mereu data curenta si ora la emiterea facturii
+         JTextField nrAviz =  new JTextField();
+         JTextField cumparator = new JTextField();
+        JTextField nrOrdin = new JTextField();
+        JTextField CIFproprietar = new JTextField();
+         JTextField Sediul = new JTextField();
+         JTextField Judetul = new JTextField();
+         JTextField IBANfirma = new JTextField();
+        JTextField bancaApr = new JTextField();
+         JButton continua = new JButton("Continua");
     //partejos
      JTextField denumireProdus = new JTextField();
      JTextField UM = new JTextField();//unitati materiale
@@ -64,12 +64,11 @@ public class implementGUI implements ActionListener {
         JLabel nrAvizLB =  new JLabel("Nr.Aviz");
         JLabel cumparatorLB = new JLabel("Cumparator");
         JLabel nrOrdinLB = new JLabel("Nr.ord");
-        JLabel CIFproprietarLB = new JLabel("C.I.F");
-        JLabel SediulLB = new JLabel("Sediu");
-        JLabel JudetulLB = new JLabel("Judetul");
-        JLabel IBANfirmaLB = new JLabel("IBAN");
-        JLabel bancaAprLB = new JLabel("Banca");
-
+        JLabel CIFproprietarLB = new JLabel("C.I.F (*Cumparator*)");
+        JLabel SediulLB = new JLabel("Sediu (*Cumparator*)");
+        JLabel JudetulLB = new JLabel("Judetul (*Cumparator*)");
+        JLabel IBANfirmaLB = new JLabel("IBAN (*Cumparator*)");
+        JLabel bancaAprLB = new JLabel("Banca (*Cumparator*)");
         //col stanga**
         furnizorLB.setBounds(20,20,120,30);
         furnizor.setBounds(20,45,170,30);
@@ -261,6 +260,7 @@ public class implementGUI implements ActionListener {
             C_I_F2P+=Integer.parseInt(CIFproprietar.getText());
             I_B_A_N_prop+=Integer.parseInt(IBANfirma.getText());
             CapitalSOCIAL+=Double.parseDouble(capitalSocial.getText());
+            System.out.println(CUMPARATOR+"\n"+JUD);
             createSecondFP();
         }
         if(actionEvent.getSource()==adaugaProdus)
@@ -281,7 +281,6 @@ public class implementGUI implements ActionListener {
                     adunapret+=p.valLei;
                 }
             }
-            System.out.println(adunapret);
             reset();
             //add restul in BD
         }
