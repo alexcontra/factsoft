@@ -2,7 +2,6 @@ package DOCgenerator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
-
 import org.apache.poi.xwpf.usermodel.*;
 import sun.security.krb5.internal.PAData;
 
@@ -16,12 +15,12 @@ public class genDoc {
                                      String JUDprop,
                                          String BANCAprop,
                                 int C_I_F1,
-                           int I_B_A_N,
+                           String I_B_A_N,
                         int nrFACT,
                      int nrAVIZ,
                          int nrORDIN,
                              int C_I_F2P,
-                                 int I_B_A_N_prop,
+                                 String I_B_A_N_prop,
                                      double CapitalSOCIAL)
     {
           try{
@@ -44,18 +43,21 @@ public class genDoc {
                 nrFacturii.setAlignment(ParagraphAlignment.CENTER);
                 nrFacturiiRun.setText("nr.Facturii "+nrFACT);
                 nrFacturiiRun.setFontSize(8);
+                nrFacturiiRun.addBreak();
 
                 XWPFParagraph data = doc.createParagraph();
                 XWPFRun dataRun = data.createRun();
                 data.setAlignment(ParagraphAlignment.CENTER);
                 dataRun.setFontSize(8);
                 dataRun.setText("Data "+String.valueOf(new Date()));
+                dataRun.addBreak();
 
                 XWPFParagraph nrAviz = doc.createParagraph();
                 XWPFRun nrAvizRun = nrAviz.createRun();
                 nrAviz.setAlignment(ParagraphAlignment.CENTER);
                 nrAvizRun.setText("nr.Aviz "+nrAVIZ);
                 nrAvizRun.setFontSize(8);
+                nrAvizRun.addBreak();
 
                 //rand1
                 XWPFParagraph furnziorP  = doc.createParagraph();
@@ -80,7 +82,7 @@ public class genDoc {
                 XWPFParagraph nrOrd2P = doc.createParagraph();
                 XWPFRun nrOrd2Run = nrOrd2P.createRun();
                 nrOrd2P.setAlignment(ParagraphAlignment.RIGHT);
-                nrOrd2Run.setText("Nr.Ord.Registru->          ");
+                nrOrd2Run.setText("Nr.Ord.Registru->         .");
                 nrOrd2Run.setFontSize(8);
                 //rand 3
                 XWPFParagraph CIFp1 = doc.createParagraph();
@@ -129,6 +131,19 @@ public class genDoc {
                 judetul2Run.setText("Judetul "+JUDprop);
 
                 //rand7
+                XWPFParagraph IBAN1p = doc.createParagraph();
+                XWPFRun IBAN1Run = IBAN1p.createRun();
+                IBAN1p.setAlignment(ParagraphAlignment.LEFT);
+                IBAN1Run.setFontSize(8);
+                IBAN1Run.setText("I.B.A.N "+I_B_A_N);
+
+                XWPFParagraph IBAN2p = doc.createParagraph();
+                XWPFRun IBAN2Run = IBAN2p.createRun();
+                IBAN2p.setAlignment(ParagraphAlignment.RIGHT);
+                IBAN2Run.setText("I.B.A.N "+I_B_A_N_prop);
+                IBAN2Run.setFontSize(8);
+
+                //rand8
                 XWPFParagraph banca1p = doc.createParagraph();
                 XWPFRun banca1Run = banca1p.createRun();
                 banca1p.setAlignment(ParagraphAlignment.LEFT);

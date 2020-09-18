@@ -238,8 +238,8 @@ public class implementGUI implements ActionListener {
         pretulUnitar.setText(null);
         valoareLei.setText(null);
     }
-     String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="";
-     int C_I_F1=0,I_B_A_N=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0,I_B_A_N_prop=0, adunapret=0;;
+     String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="",I_B_A_N="",I_B_A_N_prop="";
+     int C_I_F1=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0, adunapret=0;;
      double CapitalSOCIAL=0.0;
      ArrayList<product> listaProduse = new ArrayList<product>();
     public void actionPerformed(ActionEvent actionEvent) {
@@ -254,12 +254,12 @@ public class implementGUI implements ActionListener {
             JUDprop=Judetul.getText();
             BANCAprop=bancaApr.getText();
             C_I_F1=Integer.parseInt(CIF.getText());
-            I_B_A_N=Integer.parseInt(IBAN.getText());
+            I_B_A_N=IBAN.getText();
             nrFACT=Integer.parseInt(nrFacturii.getText());
             nrAVIZ=Integer.parseInt(nrAviz.getText());
             nrORDIN=Integer.parseInt(nrOrdin.getText());
             C_I_F2P=Integer.parseInt(CIFproprietar.getText());
-            I_B_A_N_prop=Integer.parseInt(IBANfirma.getText());
+            I_B_A_N_prop=IBANfirma.getText();
             CapitalSOCIAL=Double.parseDouble(capitalSocial.getText());
             createSecondFP();
         }
