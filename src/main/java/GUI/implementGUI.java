@@ -1,4 +1,5 @@
 package GUI;
+import DOCgenerator.genDoc;
 import Product.product;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -244,23 +245,22 @@ public class implementGUI implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==continua)
         {
-            FURNIZOR+=furnizor.getText();
-            SEDIUL+=sediul.getText();
-            JUD+=judetul.getText();
-            BANCA1+=banca.getText();
-            CUMPARATOR+=cumparator.getText();
-            SEDIULprop+=Sediul.getText();
-            JUDprop+=Judetul.getText();
-            BANCAprop+=bancaApr.getText();
-            C_I_F1+=Integer.parseInt(CIF.getText());
-            I_B_A_N+=Integer.parseInt(IBAN.getText());
-            nrFACT+=Integer.parseInt(nrFacturii.getText());
-            nrAVIZ+=Integer.parseInt(nrAviz.getText());
-            nrORDIN+=Integer.parseInt(nrOrdin.getText());
-            C_I_F2P+=Integer.parseInt(CIFproprietar.getText());
-            I_B_A_N_prop+=Integer.parseInt(IBANfirma.getText());
-            CapitalSOCIAL+=Double.parseDouble(capitalSocial.getText());
-            System.out.println(CUMPARATOR+"\n"+JUD);
+            FURNIZOR=furnizor.getText();
+            SEDIUL=sediul.getText();
+            JUD=judetul.getText();
+            BANCA1=banca.getText();
+            CUMPARATOR=cumparator.getText();
+            SEDIULprop=Sediul.getText();
+            JUDprop=Judetul.getText();
+            BANCAprop=bancaApr.getText();
+            C_I_F1=Integer.parseInt(CIF.getText());
+            I_B_A_N=Integer.parseInt(IBAN.getText());
+            nrFACT=Integer.parseInt(nrFacturii.getText());
+            nrAVIZ=Integer.parseInt(nrAviz.getText());
+            nrORDIN=Integer.parseInt(nrOrdin.getText());
+            C_I_F2P=Integer.parseInt(CIFproprietar.getText());
+            I_B_A_N_prop=Integer.parseInt(IBANfirma.getText());
+            CapitalSOCIAL=Double.parseDouble(capitalSocial.getText());
             createSecondFP();
         }
         if(actionEvent.getSource()==adaugaProdus)
@@ -271,7 +271,7 @@ public class implementGUI implements ActionListener {
                     Double.parseDouble(valoareLei.getText())
                     );
             listaProduse.add(objNew);
-            nrCrt+=listaProduse.size();
+            nrCrt=listaProduse.size();
             Iterator<product> ii = listaProduse.iterator();
             while(ii.hasNext())
             {
@@ -286,7 +286,7 @@ public class implementGUI implements ActionListener {
         }
         if(actionEvent.getSource()==generateFACT)
         {
-            //gen WORDOC
+            genDoc newfact = new genDoc(FURNIZOR,SEDIUL,JUD,BANCA1,CUMPARATOR,SEDIULprop,JUDprop,BANCAprop,C_I_F1,I_B_A_N,nrFACT,nrAVIZ,nrORDIN,C_I_F2P,I_B_A_N_prop,CapitalSOCIAL);
             reset();
             resetPS();
         }
