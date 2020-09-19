@@ -237,8 +237,8 @@ public class implementGUI implements ActionListener {
         valoareLei.setText(null);
     }
      String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="",I_B_A_N="",I_B_A_N_prop="";
-     int C_I_F1=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0, adunapret=0;
-     double CapitalSOCIAL=0.0;
+     int C_I_F1=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0;
+     double CapitalSOCIAL=0.0,adunapret=0.0;
      ArrayList<product> listaProduse = new ArrayList<product>();
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==continua)
@@ -298,7 +298,8 @@ public class implementGUI implements ActionListener {
                     ,C_I_F2P
                     ,I_B_A_N_prop
                     ,CapitalSOCIAL
-                    ,listaProduse);
+                    ,listaProduse,
+                    adunapret);
             reset();
             resetPS();
         }

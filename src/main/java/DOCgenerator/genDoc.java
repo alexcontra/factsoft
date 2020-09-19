@@ -29,7 +29,8 @@ public class genDoc {
                              int C_I_F2P,
                                  String I_B_A_N_prop,
                                      double CapitalSOCIAL,
-                                                ArrayList<product> listaProduse)
+                                                ArrayList<product> listaProduse,
+                                          double valoareTotala)
     {
           try{
                 XWPFDocument doc = new XWPFDocument();
@@ -169,11 +170,11 @@ public class genDoc {
                 XWPFTable productTable = doc.createTable();
                 XWPFTableRow firstRow = productTable.createRow();
                 firstRow.addNewTableCell().setText("Nr.Crt");
-                firstRow.addNewTableCell().setText("Denumirea Produselor\nsau a servicilor");
+                firstRow.addNewTableCell().setText("Denumire");
                 firstRow.addNewTableCell().setText("U.M");
                 firstRow.addNewTableCell().setText("Cantitate");
-                firstRow.addNewTableCell().setText("Pretul Unitar\n-lei-");
-                firstRow.addNewTableCell().setText("Valoare\n-lei-");
+                firstRow.addNewTableCell().setText("Pretul Unitar(lei)");
+                firstRow.addNewTableCell().setText("Valoare(lei)");
                 for(int i=0;i<listaProduse.size();i++)
                 {
                       XWPFTableRow newRow = productTable.createRow();
@@ -184,7 +185,7 @@ public class genDoc {
                       newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).pretUnitar));
                       newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).valLei));
                 }
-
+                //calibrateTable
                 CTTbl table = productTable.getCTTbl();
                 CTTblPr pr  = productTable.getCTTbl().getTblPr();
                 CTTblWidth tblW = pr.getTblW();
@@ -193,7 +194,30 @@ public class genDoc {
                 pr.setTblW(tblW);
                 table.setTblPr(pr);
                 //antet
+                XWPFParagraph antetParagraph = doc.createParagraph();
+                XWPFRun antetRun = antetParagraph.createRun();
+                antetRun.setFontSize(10);
+                antetRun.setText("Valoare totala "+valoareTotala);
+                antetRun.setBold(true);
+                antetParagraph.setAlignment(ParagraphAlignment.RIGHT);
+                antetRun.addBreak();
+                antetRun.addBreak();
+                //signature
+                XWPFParagraph signatureP = doc.createParagraph();
+                XWPFRun signatureRun = signatureP.createRun();
+                signatureP.setAlignment(ParagraphAlignment.RIGHT);
+                signatureRun.setBold(true);
+                signatureRun.setText("Semnatura primire\n");
+                signatureRun.setFontSize(10);
+                signatureRun.addBreak();
 
+                XWPFParagraph signature2P = doc.createParagraph();
+                XWPFRun signature2Run = signatureP.createRun();
+                signature2P.setAlignment(ParagraphAlignment.LEFT);
+                signature2Run.setBold(true);
+                signature2Run.setText("Semnatura furnizor\n");
+                signature2Run.setFontSize(10);
+                signature2Run.addBreak();
 
                 doc.write(ff);
                 ff.close();
