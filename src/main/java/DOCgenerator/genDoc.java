@@ -1,9 +1,16 @@
 package DOCgenerator;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+
+import Product.product;
 import org.apache.poi.xwpf.usermodel.*;
-import sun.security.krb5.internal.PAData;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
 
 public class genDoc {
     public genDoc(String FURNIZOR,
@@ -21,7 +28,8 @@ public class genDoc {
                          int nrORDIN,
                              int C_I_F2P,
                                  String I_B_A_N_prop,
-                                     double CapitalSOCIAL)
+                                     double CapitalSOCIAL,
+                                                ArrayList<product> listaProduse)
     {
           try{
                 XWPFDocument doc = new XWPFDocument();
@@ -155,7 +163,36 @@ public class genDoc {
                 banca2p.setAlignment(ParagraphAlignment.RIGHT);
                 banca2Run.setFontSize(8);
                 banca2Run.setText("Banca "+BANCAprop);
+                banca2Run.addBreak();
 
+                //table
+                XWPFTable productTable = doc.createTable();
+                XWPFTableRow firstRow = productTable.createRow();
+                firstRow.addNewTableCell().setText("Nr.Crt");
+                firstRow.addNewTableCell().setText("Denumirea Produselor\nsau a servicilor");
+                firstRow.addNewTableCell().setText("U.M");
+                firstRow.addNewTableCell().setText("Cantitate");
+                firstRow.addNewTableCell().setText("Pretul Unitar\n-lei-");
+                firstRow.addNewTableCell().setText("Valoare\n-lei-");
+                for(int i=0;i<listaProduse.size();i++)
+                {
+                      XWPFTableRow newRow = productTable.createRow();
+                      newRow.addNewTableCell().setText(String.valueOf(i+1));
+                      newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).denumireProdus));
+                      newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).UM));
+                      newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).cantitate));
+                      newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).pretUnitar));
+                      newRow.addNewTableCell().setText(String.valueOf(listaProduse.get(i).valLei));
+                }
+
+                CTTbl table = productTable.getCTTbl();
+                CTTblPr pr  = productTable.getCTTbl().getTblPr();
+                CTTblWidth tblW = pr.getTblW();
+                tblW.setW(BigInteger.valueOf(5000));
+                tblW.setType(STTblWidth.PCT);
+                pr.setTblW(tblW);
+                table.setTblPr(pr);
+                //antet
 
 
                 doc.write(ff);
