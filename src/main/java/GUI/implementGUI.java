@@ -35,8 +35,6 @@ public class implementGUI implements ActionListener {
      JTextField pretulUnitar = new JTextField();
     JTextField valoareLei = new JTextField();
     //label cu denumirea nr crt , denumirea produselor , um ,cantitate ,pret unitar , valoare lei
-     int totalWaccize = 0;
-    int nrCrt=0;
     JButton adaugaProdus = new JButton("Adauga");
      JButton generateFACT = new JButton("Genereaza");
      JFrame secondFrame = new JFrame();
@@ -239,8 +237,8 @@ public class implementGUI implements ActionListener {
         valoareLei.setText(null);
     }
      String FURNIZOR ="",SEDIUL="",JUD="",BANCA1="",CUMPARATOR="",SEDIULprop="",JUDprop="",BANCAprop="",I_B_A_N="",I_B_A_N_prop="";
-     int C_I_F1=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0, adunapret=0;;
-     double CapitalSOCIAL=0.0;
+     int C_I_F1=0,nrFACT=0,nrAVIZ=0,nrORDIN=0,C_I_F2P=0;
+     double CapitalSOCIAL=0.0,adunapret=0.0;
      ArrayList<product> listaProduse = new ArrayList<product>();
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==continua)
@@ -271,7 +269,6 @@ public class implementGUI implements ActionListener {
                     Double.parseDouble(valoareLei.getText())
                     );
             listaProduse.add(objNew);
-            nrCrt=listaProduse.size();
             Iterator<product> ii = listaProduse.iterator();
             while(ii.hasNext())
             {
@@ -282,11 +279,27 @@ public class implementGUI implements ActionListener {
                 }
             }
             reset();
-            //add restul in BD
         }
         if(actionEvent.getSource()==generateFACT)
         {
-            genDoc newfact = new genDoc(FURNIZOR,SEDIUL,JUD,BANCA1,CUMPARATOR,SEDIULprop,JUDprop,BANCAprop,C_I_F1,I_B_A_N,nrFACT,nrAVIZ,nrORDIN,C_I_F2P,I_B_A_N_prop,CapitalSOCIAL);
+            genDoc newfact = new genDoc(FURNIZOR
+                    ,SEDIUL
+                    ,JUD
+                    ,BANCA1
+                    ,CUMPARATOR
+                    ,SEDIULprop
+                    ,JUDprop
+                    ,BANCAprop
+                    ,C_I_F1
+                    ,I_B_A_N
+                    ,nrFACT
+                    ,nrAVIZ
+                    ,nrORDIN
+                    ,C_I_F2P
+                    ,I_B_A_N_prop
+                    ,CapitalSOCIAL
+                    ,listaProduse,
+                    adunapret);
             reset();
             resetPS();
         }
